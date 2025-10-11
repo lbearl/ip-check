@@ -1,0 +1,7 @@
+name = "ip-bearl-me"
+main = "src/index.ts"
+compatibility_date = "2025-10-11"
+
+[[routes]]
+pattern = "ip.bearl.me"
+custom_domain = true
