@@ -3,7 +3,7 @@
 [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-F38020?logo=cloudflare&logoColor=white)](https://developers.cloudflare.com/workers/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
-[![Deploys from GitHub](https://img.shields.io/badge/CI-CD%20via%20GitHub%20Actions-2088FF?logo=github&logoColor=white)](https://github.com/)
+[![Deploys from GitHub](https://img.shields.io/badge/Deploy-Cloudflare%20Git%20Integration-F38020?logo=cloudflare&logoColor=white)](https://developers.cloudflare.com/workers/ci-cd/)
 
 A lightweight Cloudflare Worker that returns your public IP address — perfect for scripts, diagnostics, and quick checks.
 
@@ -75,8 +75,12 @@ curl https://ip.bearl.me/details?type=text
 
 ## Deploy
 
+This project uses [Cloudflare's Git integration](https://developers.cloudflare.com/workers/ci-cd/) — pushing to the `main` branch automatically triggers a deploy.
+
+### Manual deploy
+
+If you need to deploy manually (e.g. for local testing):
+
 1. Clone the repo
 2. `npm install`
 3. `npx wrangler deploy`
-4. Follow prompts to sign in to Cloudflare (alternatively, run in your CI and make sure that GitHub is already connected)
-5. Application will automatically deploy
