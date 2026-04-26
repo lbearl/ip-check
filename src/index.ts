@@ -37,13 +37,15 @@ export default {
     };
 
     // --- IP extraction (force IPv4 when present)
-    const rawIp =
-      request.headers.get("cf-connecting-ip") ||
-      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-      request.headers.get("x-real-ip") ||
-      "0.0.0.0";
-    const ipv4Match = rawIp.match(/(\d{1,3}\.){3}\d{1,3}/);
-    const ip = ipv4Match ? ipv4Match[0] : rawIp;
+    const ipv4Re = /(\d{1,3}\.){3}\d{1,3}/;
+    const candidates = [
+      request.headers.get("cf-connecting-ip"),
+      ...(request.headers.get("x-forwarded-for")?.split(",").map(s => s.trim()) ?? []),
+      request.headers.get("x-real-ip"),
+    ].filter(Boolean) as string[];
+
+    const ipv4 = candidates.map(c => c.match(ipv4Re)?.[0]).find(Boolean);
+    const ip = ipv4 ?? candidates[0] ?? "0.0.0.0";
 
     // --- Negotiation
     const qType = url.searchParams.get("type")?.toLowerCase();
